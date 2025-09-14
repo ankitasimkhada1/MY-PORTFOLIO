@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block title %}Contact - Ankita's Portfolio{% endblock %}
+{% load django_bootstrap5 %}
+{% block content %}
+    <div class="row">
+        <div class="col-lg-10 mx-auto">
+            <h1 class="text-center mb-5 fw-bold fs-1 text-shadow">Get in Touch</h1>
+            <p class="text-center lead mb-5 fs-4 text-muted">I'd love to hear from you. Let's discuss your project!</p>
+        </div>
+    </div>
+    <div class="row g-5">
+        <div class="col-lg-5">
+            <div class="card border-0 shadow-lg h-100">
+                <div class="card-body p-4">
+                    <h3 class="fw-bold mb-4 fs-3 text-shadow"><i class="fas fa-info-circle me-2"></i> Contact Info</h3>
+                    <ul class="list-unstyled fs-5">
+                        <li class="mb-4">
+                            <i class="fas fa-envelope text-primary me-3 fs-4"></i>
+                            <a href="mailto:ankitasimkhada56@gmail.com" class="text-decoration-none fs-5">ankitasimkhada56@gmail.com</a>
+                        </li>
+                        <li class="mb-4">
+                            <i class="fas fa-linkedin text-primary me-3 fs-4"></i>
+                            <a href="https://www.linkedin.com/in/ankita-simkhada-a44710286?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" class="text-decoration-none fs-5">LinkedIn</a>
+                        </li>
+                        <li class="mb-4">
+                            <i class="fas fa-github text-primary me-3 fs-4"></i>
+                            <a href="https://github.com/ankitasimkhada1" target="_blank" class="text-decoration-none fs-5">GitHub</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-7">
+            <div class="contact-form card border-0 shadow-lg p-5" style="transition: all 0.3s ease;">
+                <form method="post">
+                    {% csrf_token %}
+                    {% bootstrap_form form layout='floating' size='lg' %}
+                    <button type="submit" class="btn btn-primary w-100 mt-4 px-5 py-3 fs-4 shadow-lg" style="transition: all 0.3s ease; opacity: 1;">
+                        Send Message <i class="fas fa-paper-plane"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

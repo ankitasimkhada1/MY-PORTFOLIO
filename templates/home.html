@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+{% block title %}Home - Ankita's Portfolio{% endblock %}
+{% block content %}
+    <!-- Hero Section -->
+    <section class="hero-section text-white text-center py-6" style="background: linear-gradient(135deg, #1a1a1a, #4a90e2);">
+        <div class="container">
+            <img src="{% if profile.profile_picture %}{{ profile.profile_picture.url }}{% else %}https://via.placeholder.com/200?text=AS{% endif %}" class="rounded-circle mb-4 shadow-lg" alt="Profile Picture" style="width: 200px; height: 200px; object-fit: cover; border: 6px solid #fff;">
+            <h1 class="display-3 fw-bold text-glow">{{ profile.name }}</h1>
+            <p class="lead mb-4 fs-4">{{ profile.bio }}</p>
+            <a href="{% url 'contact' %}" class="btn btn-primary btn-lg px-4 py-2 fs-5">Hire Me <i class="fas fa-paper-plane"></i></a>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="skills-section py-6 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-5 fw-bold fs-1 text-shadow">My Expertise</h2>
+            <div class="row text-center">
+                <div class="col-md-8 mx-auto">
+                    <h3 class="mb-4 fs-3">Technical Skills</h3>
+                    <div class="d-flex flex-wrap justify-content-center gap-3">
+                        <span class="badge bg-primary p-3 fs-4 shadow-sm"><i class="fas fa-code"></i> Django</span>
+                        <span class="badge bg-primary p-3 fs-4 shadow-sm"><i class="fas fa-python"></i> Python</span>
+                        <span class="badge bg-primary p-3 fs-4 shadow-sm"><i class="fas fa-html5"></i> HTML</span>
+                        <span class="badge bg-primary p-3 fs-4 shadow-sm"><i class="fas fa-css3"></i> CSS</span>
+                    </div>
+                    <h3 class="mt-5 mb-4 fs-3">Tools & Proficiency</h3>
+                    <div class="d-flex flex-wrap justify-content-center gap-3">
+                        <span class="badge bg-secondary p-3 fs-4 shadow-sm"><i class="fas fa-file-word"></i> MS Word</span>
+                        <span class="badge bg-secondary p-3 fs-4 shadow-sm"><i class="fas fa-table"></i> Excel</span>
+                        <span class="badge bg-secondary p-3 fs-4 shadow-sm"><i class="fas fa-file-powerpoint"></i> PowerPoint</span>
+                        <span class="badge bg-secondary p-3 fs-4 shadow-sm"><i class="fas fa-diagram-project"></i> Draw.io</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Carousel -->
+    {% if projects %}
+        <section class="projects-section py-6">
+            <div class="container">
+                <h2 class="text-center mb-5 fw-bold fs-1 text-shadow">Featured Projects</h2>
+                <div id="projectCarousel" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        {% for project in projects|slice:":3" %}
+                            <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                                <div class="card border-0 shadow-lg" style="min-height: 400px;">
+                                    {% if project.screenshot %}
+                                        <img src="{{ project.screenshot.url }}" class="card-img-top" alt="{{ project.title }}" style="height: 300px; object-fit: cover;">
+                                    {% else %}
+                                        <div class="card-img-top bg-secondary d-flex align-items-center justify-content-center" style="height: 300px;">
+                                            <i class="fas fa-laptop fa-4x text-white"></i>
+                                        </div>
+                                    {% endif %}
+                                    <div class="card-body">
+                                        <h4 class="card-title fw-bold fs-3">{{ project.title }}</h4>
+                                        <p class="card-text fs-5">{{ project.description|truncatewords:20 }}</p>
+                                        {% if project.link %}
+                                            <a href="{{ project.link }}" class="btn btn-outline-primary mt-3 px-4 py-2 fs-5" target="_blank">View Project <i class="fas fa-external-link-alt"></i></a>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#projectCarousel" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon bg-dark rounded-circle" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#projectCarousel" data-bs-slide="next">
+                        <span class="carousel-control-next-icon bg-dark rounded-circle" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+                <div class="text-center mt-5">
+                    <a href="{% url 'projects' %}" class="btn btn-primary px-5 py-3 fs-4">See All Projects <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </section>
+    {% endif %}
+
+    <!-- Testimonials Section -->
+    {% if testimonials %}
+        <section class="testimonials-section py-6 bg-light">
+            <div class="container">
+                <h2 class="text-center mb-5 fw-bold fs-1 text-shadow">What Clients Say</h2>
+                <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        {% for testimonial in testimonials %}
+                            <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                                <div class="card border-0 shadow-lg p-5 text-center" style="min-height: 300px;">
+                                    <p class="lead fs-4">"{{ testimonial.quote }}"</p>
+                                    <h4 class="fw-bold text-primary mt-3 fs-3">— {{ testimonial.author }}</h4>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon bg-dark rounded-circle" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="next">
+                        <span class="carousel-control-next-icon bg-dark rounded-circle" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+    {% endif %}
+{% endblock %}

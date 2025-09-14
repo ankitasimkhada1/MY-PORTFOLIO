@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% block title %}Projects - Ankita's Portfolio{% endblock %}
+{% block content %}
+    <div class="row mb-4">
+        <div class="col-12 text-center">
+            <a href="{% url 'home' %}" class="btn btn-outline-primary btn-lg px-4 py-2 fs-5 mb-3"><i class="fas fa-arrow-left me-2"></i> Back to Home</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-10 mx-auto">
+            <h1 class="text-center mb-5 fw-bold fs-1 text-shadow">My Projects</h1>
+            <p class="text-center lead mb-5 fs-4 text-muted">Explore my latest work showcasing Django, Python, and web development skills.</p>
+        </div>
+    </div>
+    <div class="row g-4">
+        {% for project in projects %}
+            <div class="col-lg-4 col-md-6">
+                <div class="card project-card border-0 shadow-lg h-100" style="transition: all 0.4s ease; opacity: 1;">
+                    {% if project.screenshot %}
+                        <img src="{{ project.screenshot.url }}" class="card-img-top" alt="{{ project.title }}" style="height: 300px; object-fit: cover;">
+                    {% else %}
+                        <div class="card-img-top bg-gradient d-flex align-items-center justify-content-center" style="height: 300px;">
+                            <i class="fas fa-laptop fa-3x text-white"></i>
+                        </div>
+                    {% endif %}
+                    <div class="card-body d-flex flex-column">
+                        <h3 class="card-title fw-bold fs-3 text-shadow">{{ project.title }}</h3>
+                        <p class="card-text flex-grow-1 fs-5">{{ project.description }}</p>
+                        {% if project.link %}
+                            <a href="{{ project.link }}" class="btn btn-primary mt-auto px-4 py-3 fs-5" target="_blank" style="transition: all 0.3s ease;">
+                                View Project <i class="fas fa-external-link-alt"></i>
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <div class="col-12">
+                <div class="text-center py-5">
+                    <i class="fas fa-briefcase fa-5x text-muted mb-3"></i>
+                    <h2 class="fw-bold text-muted fs-2">No projects yet</h2>
+                    <p class="lead text-muted fs-4">Check back soon for exciting Django projects!</p>
+                    <a href="{% url 'home' %}" class="btn btn-primary btn-lg px-5 py-3 fs-5">Back to Home</a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="text-center mt-5">
+        <a href="{% url 'contact' %}" class="btn btn-primary btn-lg px-5 py-3 fs-5">Discuss a Project <i class="fas fa-chat-dots"></i></a>
+    </div>
+    <div class="row mt-4">
+        <div class="col-12 text-center">
+            <a href="{% url 'home' %}" class="btn btn-outline-primary btn-lg px-4 py-2 fs-5"><i class="fas fa-arrow-left me-2"></i> Back to Home</a>
+        </div>
+    </div>
+{% endblock %}
