@@ -139,5 +139,5 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-ALLOWED_HOSTS = ['ankitasimkhada.onrender.com', '127.0.0.1']
-DEBUG = True
+ALLOWED_HOSTS = ['*']
+DEBUG = False
