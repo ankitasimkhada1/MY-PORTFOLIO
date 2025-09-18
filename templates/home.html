@@ -4,6 +4,7 @@
     <!-- Hero Section -->
     <section class="hero-section text-white text-center py-6" style="background: linear-gradient(135deg, #1a1a1a, #4a90e2);">
         <div class="container">
+            {% comment %} <img src="https://i.imgur.com/media/profiles/DSC_1449_9Lv4gNq.jpg" class="rounded-circle mb-4 shadow-lg" alt="Profile Picture" style="width: 200px; height: 200px; object-fit: cover; border: 6px solid #fff;"> {% endcomment %}
             <img src="{% if profile.profile_picture %}{{ profile.profile_picture.url }}{% else %}https://via.placeholder.com/200?text=AS{% endif %}" class="rounded-circle mb-4 shadow-lg" alt="Profile Picture" style="width: 200px; height: 200px; object-fit: cover; border: 6px solid #fff;">
             <h1 class="display-3 fw-bold text-glow">{{ profile.name }}</h1>
             <p class="lead mb-4 fs-4">{{ profile.bio }}</p>
